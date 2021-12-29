@@ -51,6 +51,7 @@ h4 {
 .login-button {
   border-radius: 0.5rem;
   width: fit-content;
+  background-color: #4867f3
 }
 .input-group {
   position: relative;
@@ -74,4 +75,27 @@ h4 {
   z-index: 100;
   top: 3px;
   color: #9ba7ca;
+}
+
+.invalid input {
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+.invalid input:focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
+
+.error_text {
+  color: #b40e0e;
+}
+
+button:disabled,
+button:disabled:hover,
+button:disabled:active {
+  background-color: #ccc;
+  color: #292929;
+  border-color: #ccc;
+  cursor: not-allowed;
 }

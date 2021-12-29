@@ -13,7 +13,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/home" element={<Dashboard />} />
-          <Route path="/post:1" element={<ViewSinglePost />} />
+          <Route path="/post/:id" element={<ViewSinglePost />} />
           <Route path="*" element={() => "404 NOT FOUND"} />
         </Routes>
       </Router>
