@@ -7,8 +7,94 @@ import { AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { BiLogIn } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import useInput from "../../hooks/useInput";
+import { useNavigate } from "react-router-dom";
+import validator from "validator";
+
+const isNotEmpty = (value) => value.trim() !== "";
+const isEmail = (value) => validator.isEmail(value);
 
 const Login = () => {
+  const navigate = useNavigate();
+  const {
+    value: emailValue,
+    isValid: emailIsValid,
+    hasError: emailHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    reset: resetEmail,
+  } = useInput(isEmail);
+
+  const {
+    value: passwordValue,
+    isValid: passwordValid,
+    hasError: passwordHasError,
+    valueChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+    reset: resetPassword,
+  } = useInput(isNotEmpty);
+
+  let formIsValid = false;
+
+  if (emailIsValid && passwordValid) {
+    formIsValid = true;
+  }
+
+  const resetFormHandler = () => {
+    resetEmail();
+    resetPassword();
+  };
+
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    if (!formIsValid) {
+      alert("Please fill required fields");
+      return;
+    }
+
+    try {
+      const graphqlQuery = {
+        query: `
+          query UserLogin($email: String!, $password: String!) {
+            login(email: $email, password: $password) {
+              token
+              userId
+            }
+          }
+        `,
+        variables: {
+          email: emailValue,
+          password: passwordValue,
+        },
+      };
+      await fetch("http://localhost:4000/graphql", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(graphqlQuery),
+      })
+        .then((res) => {
+          resetFormHandler();
+          return res.json();
+        })
+        .then((resData) => {
+          if (resData.errors) {
+            throw resData.errors[0].message;
+          }
+          localStorage.setItem("userId", resData.data.login.userId);
+          localStorage.setItem("token", resData.data.login.token);
+          navigate("/home");
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const emailClasses = emailHasError ? "invalid" : "";
+  const passwordClasses = passwordHasError ? "invalid" : "";
+
   return (
     <div className="main-login-div">
       <div className="main-login-body">
@@ -21,41 +107,52 @@ const Login = () => {
             <p className="text-muted mb-0">Sign in to continue.</p>
           </div>
           <div className="container">
-            <form>
+            <form onSubmit={submitHandler}>
               <div className="form-group">
                 <label>Email Address</label>
-                <div className="input-group">
-                  <span className="auth-form-icon">
-                    <AiOutlineMail />
-                  </span>
-                  <input
-                    size={20}
-                    className="form-control"
-                    type="email"
-                    data-val="true"
-                    data-val-required="The Email ID field is required."
-                    id="email"
-                    name="email"
-                  />
+                <div className={emailClasses}>
+                  <div className="input-group">
+                    <span className="auth-form-icon">
+                      <AiOutlineMail />
+                    </span>
+                    <input
+                      className="form-control"
+                      type="email"
+                      name="email"
+                      value={emailValue}
+                      onChange={emailChangeHandler}
+                      onBlur={emailBlurHandler}
+                    />
+                  </div>
                 </div>
+                {emailHasError && (
+                  <p className="error_text">
+                    Please enter a valid email address.
+                  </p>
+                )}
               </div>
               <div className="form-group">
                 <label>Password</label>
-                <div className="input-group">
-                  <span className="auth-form-icon">
-                    <RiLockPasswordLine />
-                  </span>
-                  <input
-                    className="form-control"
-                    type="password"
-                    data-val="true"
-                    data-val-required="The Password field is required."
-                    id="Password"
-                    name="Password"
-                  />
+                <div className={passwordClasses}>
+                  <div className="input-group">
+                    <span className="auth-form-icon">
+                      <RiLockPasswordLine />
+                    </span>
+                    <input
+                      className="form-control"
+                      type="password"
+                      name="Password"
+                      value={passwordValue}
+                      onChange={passwordChangeHandler}
+                      onBlur={passwordBlurHandler}
+                    />
+                  </div>
                 </div>
+                {passwordClasses && (
+                  <p className="error_text">Please enter a password.</p>
+                )}
               </div>
-              <Button className="login-button">
+              <Button className="login-button" type="submit">
                 Login <BiLogIn />
               </Button>
             </form>

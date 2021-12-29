@@ -7,10 +7,11 @@ const PostItems = (props) => {
     <div className="posts-div">
       {props.posts.map((post) => (
         <Posts
-          key={post.id}
+          key={post._id}
+          id={post._id}
           title={post.title}
           content={post.content}
-          image={post.image}
+          image={post.imageUrl}
         />
       ))}
     </div>
