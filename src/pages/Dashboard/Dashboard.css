@@ -1,0 +1,7 @@
+.post-button {
+  display: flex;
+  width: fit-content;
+  float: right;
+  margin-top: 1rem;
+  margin-right: 2rem;
+}

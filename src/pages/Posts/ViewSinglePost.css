@@ -1,0 +1,30 @@
+.single-post {
+  max-width: 80%;
+  height: 70vh;
+  background-color: white;
+  display: flex;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
+}
+
+.single-post:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
+}
+
+.post-view {
+  margin-top: 1rem;
+}
+
+.back-button {
+  margin-top: 1rem;
+  margin-left: 2rem;
+}
+
+.edit-button {
+  display: flex;
+  width: fit-content;
+  column-gap: 0.5rem;
+  float: right;
+  margin-top: -2rem;
+  margin-right: 10rem;
+}

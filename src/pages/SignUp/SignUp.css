@@ -1,0 +1,85 @@
+.main-signup-body {
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.main-signup-div {
+  text-align: center;
+  margin-top: 0;
+  height: 100vh;
+  background-color: rgba(31, 78, 233, 0.904);
+}
+.main {
+  margin: 5rem;
+  height: auto;
+  max-width: 26rem;
+}
+.header {
+  margin: 1rem;
+  font-size: 20px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+  text-align: left;
+}
+label {
+  font-weight: 400;
+  color: #656d9a;
+  font-size: 13px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+.auth-signup-logo-box {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 70px;
+  text-align: center;
+}
+
+.auth-logo-text,
+h4 {
+  margin-top: 2rem;
+  font-family: "Roboto", sans-serif;
+  color: #50649c;
+}
+.text-center {
+  text-align: center !important;
+}
+.auth-logo {
+  border-radius: 50%;
+  background-color: #ffffff;
+  padding: 4px;
+  box-shadow: 0px 0px 0px 2.25px #eff2f9;
+}
+
+.signup-button {
+  border-radius: 0.5rem;
+  width: fit-content;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  width: 100%;
+}
+
+.auth-form-icon {
+  width: 30px;
+  height: 30px;
+  background-color: #eff2f9;
+  text-align: center;
+  line-height: 25px;
+  border-radius: 10%;
+  position: absolute;
+  right: 5px;
+  z-index: 100;
+  top: 3px;
+  color: #9ba7ca;
+}

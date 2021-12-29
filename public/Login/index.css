@@ -1,0 +1,12 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 360px;
+  min-width: 320px;
+  height: 365px;
+  background-color: rgb(248, 239, 239);
+  border-radius: 20px;
+  margin: 35px 10px 25px 10px;
+}

@@ -1,0 +1,30 @@
+.wrapper {
+  display: flex;
+  position: relative;
+}
+
+.inputText {
+  z-index: 1;
+  width: 320px;
+  height: 38px;
+  border: 1px solid #f1f1f5;
+  box-sizing: border-box;
+  border-radius: 15px;
+  background: #fafafb;
+  padding: 0 20px;
+  margin-bottom: 15px;
+  font-size: 12px;
+  color: #92929d;
+}
+
+.inputText:focus {
+  outline: none;
+  font-size: 75%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+  color: #fc5a5a;
+}
+.inputText::placeholder {
+  opacity: 0;
+}
+

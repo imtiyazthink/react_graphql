@@ -1,0 +1,12 @@
+.card-main {
+  max-width: 15rem;
+  height: auto;
+  background-color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
+}
+
+.card-main:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
+}
