@@ -3,6 +3,7 @@ import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ViewSinglePost from "./pages/Posts/ViewSinglePost";
+import ProtectedRoute from "./protectedRoutes/ProtectedRoutes";
 
 function App() {
   return (
@@ -12,8 +13,12 @@ function App() {
           <Route exact path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/home" element={<Dashboard />} />
-          <Route path="/post/:id" element={<ViewSinglePost />} />
+          <Route path="/home" element={<ProtectedRoute />}>
+            <Route path="/home" element={<Dashboard />} />
+          </Route>
+          <Route path="/post/:id" element={<ProtectedRoute />}>
+            <Route path="/post/:id" element={<ViewSinglePost />} />
+          </Route>
           <Route path="*" element={() => "404 NOT FOUND"} />
         </Routes>
       </Router>
