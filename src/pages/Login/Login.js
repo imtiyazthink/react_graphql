@@ -1,4 +1,6 @@
 import React from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Button from "../../components/Button/Button";
 import Card from "../../components/Card/Card";
 import "./Login.css";
@@ -40,6 +42,11 @@ const Login = () => {
     formIsValid = true;
   }
 
+  const notify = () =>
+    toast.success("Logged In Successfully...!", {
+      position: "top-center",
+    });
+
   const resetFormHandler = () => {
     resetEmail();
     resetPassword();
@@ -48,7 +55,9 @@ const Login = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
     if (!formIsValid) {
-      alert("Please fill required fields");
+      toast.warn("Please fill required fields", {
+        position: "top-center",
+      });
       return;
     }
 
@@ -82,10 +91,13 @@ const Login = () => {
           }
           localStorage.setItem("userId", resData.data.login.userId);
           localStorage.setItem("token", resData.data.login.token);
+          notify();
           navigate("/home");
         })
         .catch((err) => {
-          alert(err);
+          toast.error(err, {
+            position: "top-center",
+          });
         });
     } catch (err) {
       console.log(err);

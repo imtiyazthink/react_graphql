@@ -1,3 +1,9 @@
 .right-content {
-    margin-left: 59rem;
+  display: flex;
+  margin-left: 39rem;
+  color: white;
+}
+
+.user {
+  color: blanchedalmond;
 }

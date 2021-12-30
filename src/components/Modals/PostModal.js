@@ -1,8 +1,11 @@
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import React, { useState } from "react";
 import useInput from "../../hooks/useInput";
 import { useNavigate } from "react-router-dom";
+import "./PostModal.css";
 
 const isNotEmpty = (value) => value.trim() !== "";
 
@@ -61,7 +64,9 @@ const PostModal = (props) => {
     event.preventDefault();
     if (!props.isEdit) {
       if (!formIsValid) {
-        alert("Please fill required fields");
+        toast.warn("Please fill required fields", {
+          position: "top-center",
+        });
         return;
       }
     }
@@ -135,11 +140,24 @@ const PostModal = (props) => {
           return res.json();
         })
         .then((data) => {
-          console.log(data);
+          if (data.errors) {
+            throw data.errors[0].message;
+          }
+          if (props.isEdit) {
+            navigate("/home");
+            return toast.success("Post Updated Successfully...!", {
+              position: "top-center",
+            });
+          }
+          toast.success("Post Added Successfully...!", {
+            position: "top-center",
+          });
           navigate("/home");
         })
         .catch((err) => {
-          console.log(err);
+          toast.error(err, {
+            position: "top-center",
+          });
         });
     } catch (err) {
       console.log(err);
@@ -151,7 +169,7 @@ const PostModal = (props) => {
 
   return (
     <Modal show={props.show} onHide={props.onHide}>
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className="modal_header">
         <Modal.Title>{props.isEdit ? "Edit Posts" : "Add Post"}</Modal.Title>
       </Modal.Header>
       <form onSubmit={submitHandler}>

@@ -12,7 +12,7 @@ const Dashboard = () => {
   const token = localStorage.getItem("token");
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [dataPerPage] = useState(3);
+  const [dataPerPage] = useState(4);
   const pages = Math.round(posts.length / dataPerPage);
 
   const fecthPosts = useCallback(async () => {
@@ -87,25 +87,30 @@ const Dashboard = () => {
           + POST
         </Button>
       </div>
-      {currentData === 0 ? (
-        "No Posts are available"
+      {currentData.length === 0 ? (
+        <div className="no_posts">
+          <h1>No Posts are available</h1>
+        </div>
       ) : (
-        <PostItems posts={currentData} />
+        <>
+          <PostItems posts={currentData} />
+          <div className="pagination">
+            <Button
+              onClick={goToPreviousPage}
+              className={`prev ${currentPage === 1 ? "disabled" : ""}`}
+            >
+              <AiFillBackward /> prev
+            </Button>
+            <Button
+              onClick={goToNextPage}
+              className={`next ${currentPage === pages ? "disabled" : ""}`}
+            >
+              next <BiFastForward />
+            </Button>
+          </div>
+        </>
       )}
-      <div className="pagination">
-        <Button
-          onClick={goToPreviousPage}
-          className={`prev ${currentPage === 1 ? "disabled" : ""}`}
-        >
-          <AiFillBackward /> prev
-        </Button>
-        <Button
-          onClick={goToNextPage}
-          className={`next ${currentPage === pages ? "disabled" : ""}`}
-        >
-          next <BiFastForward />
-        </Button>
-      </div>
+
       <PostModal
         show={modalShow}
         onHide={() => setModalShow(false)}

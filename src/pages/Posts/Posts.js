@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import "./Posts.css";
 import Image from "../../components/images/Image";
+import Button from "../../components/Button/Button";
 
 const Posts = (props) => {
   return (
@@ -10,13 +11,13 @@ const Posts = (props) => {
       <div className="card_image">
         <Image contain imageUrl={"http://localhost:4000/" + props.image} />
       </div>
+
+      <h5 className="card_title">{props.title}</h5>
+
+      <p className="card_content">{props.content}</p>
       <Link to={`/post/${props.id}`}>
-        <h5 className="card_title">Title Name</h5>
+        <Button className="more_content">Read More</Button>
       </Link>
-      <p className="card_content">
-        Hello there welcome to my first blog website, I warmly welcome to my
-        family, please be sitted
-      </p>
     </Card>
   );
 };

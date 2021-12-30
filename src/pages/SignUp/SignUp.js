@@ -1,4 +1,6 @@
 import React from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Button from "../../components/Button/Button";
 import Card from "../../components/Card/Card";
 import "./SignUp.css";
@@ -49,6 +51,11 @@ const SignUp = () => {
     formIsValid = true;
   }
 
+  const notify = () =>
+    toast.success("Signed Up Successfully...!", {
+      position: "top-center",
+    });
+
   const resetFormHandler = () => {
     resetName();
     resetEmail();
@@ -58,7 +65,9 @@ const SignUp = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
     if (!formIsValid) {
-      alert("Please fill required fields");
+      toast.warn("Please fill required fields", {
+        position: "top-center",
+      });
       return;
     }
 
@@ -93,11 +102,13 @@ const SignUp = () => {
           if (resData.errors) {
             throw resData.errors[0].message;
           }
-          alert("Congratulations..., Please login to continue");
+          notify();
           navigate("/login");
         })
         .catch((err) => {
-          alert(err);
+          toast.error(err, {
+            position: "top-center",
+          });
         });
     } catch (err) {
       console.log(err);

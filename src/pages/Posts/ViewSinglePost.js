@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import Card from "../../components/Card/Card";
 import NavBar from "../../components/Navbar/NavBar";
 import "./ViewSinglePost.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { FiEdit } from "react-icons/fi";
@@ -9,6 +11,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import PostModal from "../../components/Modals/PostModal";
 import Image from "../../components/images/Image";
 import { Button, Modal } from "react-bootstrap";
+import "../../components/Modals/PostModal.css";
 
 const ViewSinglePost = () => {
   const [modalShow, setModalShow] = useState(false);
@@ -57,7 +60,9 @@ const ViewSinglePost = () => {
           setPost(resData.data.post);
         })
         .catch((err) => {
-          console.log(err);
+          toast.error(err, {
+            position: "top-center",
+          });
         });
     } catch (err) {
       console.log(err);
@@ -94,11 +99,15 @@ const ViewSinglePost = () => {
           if (resData.errors) {
             throw new Error("Deleting the post failed!");
           }
-          console.log(resData);
+          toast.success("Post Deleted Successfully...!", {
+            position: "top-center",
+          });
           navigate("/home");
         })
         .catch((err) => {
-          console.log(err);
+          toast.error(err, {
+            position: "top-center",
+          });
         });
     } catch (err) {
       console.log(err);
@@ -141,7 +150,7 @@ const ViewSinglePost = () => {
       />
 
       <Modal show={deleteModalShow} onHide={deleteModalClose}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className="modal_header">
           <Modal.Title>Delet Post</Modal.Title>
         </Modal.Header>
         <form onSubmit={deletePost}>

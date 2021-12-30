@@ -4,6 +4,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ViewSinglePost from "./pages/Posts/ViewSinglePost";
 import ProtectedRoute from "./protectedRoutes/ProtectedRoutes";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           <Route path="/post/:id" element={<ProtectedRoute />}>
             <Route path="/post/:id" element={<ViewSinglePost />} />
           </Route>
-          <Route path="*" element={() => "404 NOT FOUND"} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </div>

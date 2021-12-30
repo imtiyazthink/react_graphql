@@ -1,12 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
 
 .card-main {
-  /* background-color: white;
-  cursor: pointer;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
-  transition: 0.5s;
-  width: 220px;
-  height: 315px; */
   overflow: hidden;
   box-shadow: 0 2px 20px #e1e5ee;
   border-radius: 0.2rem;
@@ -18,7 +12,6 @@
 }
 
 .card-main:hover {
-  /* box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5); */
   transform: scale(1.02);
 }
 
@@ -37,4 +30,11 @@
 
 .card_image {
   margin-bottom: -0.8rem;
+}
+
+.more_content {
+  margin-left: 2.5rem;
+  background-color: white;
+  border-color: #0000ff;
+  color: #0000ff;
 }

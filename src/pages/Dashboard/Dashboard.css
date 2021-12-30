@@ -30,3 +30,10 @@
   justify-content: center;
   margin-top: 5rem;
 }
+
+.no_posts {
+  margin-top: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
