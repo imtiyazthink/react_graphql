@@ -1,18 +1,27 @@
 .single-post {
-  max-width: 80%;
-  height: 70vh;
-  background-color: white;
   display: flex;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
-  transition: 0.5s;
+  justify-content: stretch;
+  width: auto;
+  max-width: 60rem;
+  height: 520px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.4);
+}
+
+.card-image {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-shrink: 0;
+  width: auto;
+  background: linear-gradient(#bccbfa, #3874f5);
 }
 
 .single-post:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
-}
-
-.post-view {
-  margin-top: 1rem;
 }
 
 .back-button {
@@ -27,4 +36,30 @@
   float: right;
   margin-top: -2rem;
   margin-right: 10rem;
+}
+
+.card-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  padding: 15px;
+}
+.title {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  line-height: 26px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.content {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 20px;
+  max-height: 80px;
+  overflow: hidden;
 }

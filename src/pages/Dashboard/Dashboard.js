@@ -4,12 +4,16 @@ import NavBar from "../../components/Navbar/NavBar";
 import "./Dashboard.css";
 import PostModal from "../../components/Modals/PostModal";
 import PostItems from "../Posts/PostItems";
-import logo from "../../assets/images/logo-sm.png";
+import { BiFastForward } from "react-icons/bi";
+import { AiFillBackward } from "react-icons/ai";
 
 const Dashboard = () => {
   const [modalShow, setModalShow] = useState(false);
   const token = localStorage.getItem("token");
   const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [dataPerPage] = useState(3);
+  const pages = Math.round(posts.length / dataPerPage);
 
   const fecthPosts = useCallback(async () => {
     try {
@@ -63,6 +67,18 @@ const Dashboard = () => {
     fecthPosts();
   }, [fecthPosts]);
 
+  const goToNextPage = () => {
+    setCurrentPage((page) => page + 1);
+  };
+
+  const goToPreviousPage = () => {
+    setCurrentPage((page) => page - 1);
+  };
+
+  const indexOfLastData = currentPage * dataPerPage;
+  const indexOfFirstData = indexOfLastData - dataPerPage;
+  const currentData = posts.slice(indexOfFirstData, indexOfLastData);
+
   return (
     <>
       <NavBar />
@@ -71,7 +87,25 @@ const Dashboard = () => {
           + POST
         </Button>
       </div>
-      <PostItems posts={posts} />
+      {currentData === 0 ? (
+        "No Posts are available"
+      ) : (
+        <PostItems posts={currentData} />
+      )}
+      <div className="pagination">
+        <Button
+          onClick={goToPreviousPage}
+          className={`prev ${currentPage === 1 ? "disabled" : ""}`}
+        >
+          <AiFillBackward /> prev
+        </Button>
+        <Button
+          onClick={goToNextPage}
+          className={`next ${currentPage === pages ? "disabled" : ""}`}
+        >
+          next <BiFastForward />
+        </Button>
+      </div>
       <PostModal
         show={modalShow}
         onHide={() => setModalShow(false)}

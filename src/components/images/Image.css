@@ -5,3 +5,11 @@
   object-fit: cover;
   background-repeat: no-repeat;
 }
+
+.single-image {
+  margin-top: -2rem;
+  width: 345px;
+  height: 356px;
+  background-repeat: no-repeat;
+  object-fit: contain;
+}

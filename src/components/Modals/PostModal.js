@@ -2,7 +2,7 @@ import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import React, { useState } from "react";
 import useInput from "../../hooks/useInput";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const isNotEmpty = (value) => value.trim() !== "";
 
